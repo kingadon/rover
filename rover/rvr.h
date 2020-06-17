@@ -24,4 +24,7 @@ extern int rvr_write(const char* path, char* data);
  */
 extern int rvr_write_uint(const char* path, size_t val);
 
+/** @brief Maximum bytes to reserve for writing values to component attributes. */
+extern size_t MAX_BYTES;
+
 #endif

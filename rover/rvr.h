@@ -8,6 +8,15 @@
 #ifndef RVR_H
 #define RVR_H
 
+/** Put global constants here. */
+/** @brief Maximum bytes to reserve for writing values to component attributes. */
+extern size_t MAX_BYTES;
+
+/** @brief Maximum bytes to reserve for paths to components */
+extern size_t MAX_PATH_BYTES;
+
+/** End global constants. */
+
 /**
  * @brief Write a string into file specified by path.
  * @param path Absolute path to the file.
@@ -24,7 +33,5 @@ extern int rvr_write(const char* path, char* data);
  */
 extern int rvr_write_uint(const char* path, size_t val);
 
-/** @brief Maximum bytes to reserve for writing values to component attributes. */
-extern size_t MAX_BYTES;
 
 #endif

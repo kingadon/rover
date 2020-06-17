@@ -10,13 +10,13 @@
 
 /** Put global constants here. */
 /** @brief Maximum bytes to reserve for writing values to component attributes. */
-extern size_t MAX_BYTES;
+extern const size_t MAX_BYTES;
 
 /** @brief Maximum bytes to reserve for paths to components. */
-extern size_t MAX_PATH_BYTES;
+extern const size_t MAX_PATH_BYTES;
 
 /** @brief Root directory of components. */
-extern char* ROOT_COMPONENT_DIR;
+extern const char* ROOT_COMPONENT_DIR;
 
 /** End global constants. */
 

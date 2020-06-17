@@ -16,7 +16,7 @@ extern const size_t MAX_BYTES;
 extern const size_t MAX_PATH_BYTES;
 
 /** @brief Root directory of components. */
-extern const char* ROOT_COMPONENT_DIR;
+extern const char* const ROOT_COMPONENT_DIR;
 
 /** End global constants. */
 

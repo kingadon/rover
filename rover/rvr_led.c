@@ -26,7 +26,7 @@ int ledSetStrAttr(enum LedComponent led, enum LedAttr attr, char* val) {
              ROOT_COMPONENT_DIR, 
              led_component_path[led], 
              led_attr_path[attr]);
-    rvr_write(path, val);
+    rvrWrite(path, val);
     return 0;
 }
 
@@ -36,7 +36,7 @@ int ledSetIntAttr(enum LedComponent led, enum LedAttr attr, size_t val) {
              ROOT_COMPONENT_DIR, 
              led_component_path[led], 
              led_attr_path[attr]);
-    rvr_write_uint(path, val);
+    rvrWriteUInt(path, val);
     return 0;
 }
 

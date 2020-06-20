@@ -6,7 +6,7 @@ const size_t MAX_BYTES = 8;
 const size_t MAX_PATH_BYTES = 64;
 const char* const ROOT_COMPONENT_DIR = "sys/class";
 
-int rvr_write(const char* path, char* data) {
+int rvrWrite(const char* path, char* data) {
     FILE* fptr = fopen(path, "w");
     if (!fptr) {
         perror("rvr_write:fopen");
@@ -18,7 +18,7 @@ int rvr_write(const char* path, char* data) {
     return elementsWritten;
 }
 
-int rvr_write_uint(const char* path, size_t val) {
+int rvrWriteUInt(const char* path, size_t val) {
     char strVal[MAX_BYTES];
     int elementsWritten = sprintf(strVal, "%zu", val);
     if (elementsWritten < 1) {
@@ -26,5 +26,5 @@ int rvr_write_uint(const char* path, size_t val) {
         return -1;
     }
 
-    return rvr_write(path, strVal); 
+    return rvrWrite(path, strVal); 
 }

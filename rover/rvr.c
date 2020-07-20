@@ -2,8 +2,8 @@
 #include <string.h>
 #include "rvr.h"
 
-const size_t MAX_BYTES = 32;
-const size_t MAX_PATH_BYTES = 64;
+#define MAX_BYTES 32
+#define MAX_PATH_BYTES 64
 const char* const ROOT_COMPONENT_DIR = "sys/class";
 const char* const PATH_FMT = "/%s/%s/%s";
 
@@ -12,11 +12,11 @@ enum rvrValueType {
     STRING
 };
 
-extern struct rvrvalue {
+struct rvrvalue {
     enum rvrValueType type;
     union {
         int num;
-        char str[MAX_BYTES];
+        char* str;
     };
 };
 

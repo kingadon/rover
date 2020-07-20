@@ -21,6 +21,10 @@ extern const char* const ROOT_COMPONENT_DIR;
 /** @brief Format string for snprintf to build path. */
 extern const char* const PATH_FMT;
 
+/** @brief Structure to hold either int/uint value or string value to write. */
+struct rvrvalue;
+
+
 /** End global constants. */
 
 /**

@@ -59,7 +59,7 @@ int servoSetStrAttr(enum ServoComponent servo, enum ServoAttr attr, const char* 
                             servo_attr_path[attr]);
     if (numChars < 0) { perror("servoSetStrAttr:snprintf"); return -1; }
 
-    numChars = rvrWrite(path, val);
+    numChars = rvrWriteStr(path, val);
     return numChars;
 }
 

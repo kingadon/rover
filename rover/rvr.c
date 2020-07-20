@@ -40,8 +40,16 @@ int rvrWrite(const char* path, const char* fmt, struct rvrvalue* val) {
     return charsWritten;
 }
 
+int rvrWriteStr(const char* path, char* val) {
+    struct rvrvalue rvrval = {
+        .type = STRING,
+        .str = val
+    };
+
+    return rvrWrite(path, STRING_FORMAT, &rvrval);
+}
+
 int rvrWriteInt(const char* path, int val) {
-    char strVal[MAX_BYTES];
     struct rvrvalue rvrval = {
         .type = INTEGER,
         .num = val
@@ -51,7 +59,6 @@ int rvrWriteInt(const char* path, int val) {
 }
 
 int rvrWriteUInt(const char* path, size_t val) {
-    char strVal[MAX_BYTES];
     return rvrWriteInt(path, val); 
 }
 

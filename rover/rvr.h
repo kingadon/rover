@@ -26,11 +26,19 @@ extern const char* const PATH_FMT;
 /**
  * @brief Write a string into file specified by path.
  * @param path Absolute path to the file.
- * @param fmt String value to be written.
+ * @param fmt Format string specifying val type.
  * @param val String value to be written.
  * @return Return the number of elements written or -1 if error.
  */
 extern int rvrWrite(const char* path, const char* fmt, struct rvrvalue* val);
+
+/**
+ * @brief Write a string into file specified by path.
+ * @param path Absolute path to the file.
+ * @param val String value to be written.
+ * @return Return the number of elements written or -1 if error.
+ */
+extern int rvrWriteStr(const char* path, char* val);
 
 /**
  * @brief Write an integer as string into file specified by path.

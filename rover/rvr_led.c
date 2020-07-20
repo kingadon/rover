@@ -20,6 +20,7 @@ const char* const led_attr_path[] = {
     "trigger"
 };
 
+
 int ledSetStrAttr(enum LedComponent led, enum LedAttr attr, char* val) {
     char path[MAX_PATH_BYTES];
     snprintf(path, MAX_PATH_BYTES, "/%s/%s/%s", 

@@ -6,24 +6,10 @@
 #define MAX_PATH_BYTES 64
 const char* const ROOT_COMPONENT_DIR = "sys/class";
 const char* const PATH_FMT = "/%s/%s/%s";
-
-enum rvrValueType {
-    INTEGER,
-    STRING
-};
-
-struct rvrvalue {
-    enum rvrValueType type;
-    union {
-        int num;
-        char* str;
-    };
-};
-
 const char* const NUMBER_FORMAT = "%d\n";
 const char* const STRING_FORMAT = "%s\n";
 
-int rvrWrite(const char* path, const char* fmt, struct rvrvalue* val) {
+int rvrWrite(const char* const path, const char* fmt, struct rvrvalue* val) {
     FILE* fptr = fopen(path, "w");
     if (!fptr) {
         perror("rvr_write:fopen");
@@ -37,10 +23,12 @@ int rvrWrite(const char* path, const char* fmt, struct rvrvalue* val) {
         charsWritten = fprintf(fptr, fmt, val->str);
     }
 
+    fclose(fptr);
+
     return charsWritten;
 }
 
-int rvrWriteStr(const char* path, char* val) {
+int rvrWriteStr(const char* const path, const char* const val) {
     struct rvrvalue rvrval = {
         .type = STRING,
         .str = val
@@ -49,7 +37,7 @@ int rvrWriteStr(const char* path, char* val) {
     return rvrWrite(path, STRING_FORMAT, &rvrval);
 }
 
-int rvrWriteInt(const char* path, int val) {
+int rvrWriteInt(const char* const path, int val) {
     struct rvrvalue rvrval = {
         .type = INTEGER,
         .num = val
@@ -58,7 +46,7 @@ int rvrWriteInt(const char* path, int val) {
     return rvrWrite(path, NUMBER_FORMAT, &rvrval); 
 }
 
-int rvrWriteUInt(const char* path, size_t val) {
+int rvrWriteUInt(const char* const path, size_t val) {
     return rvrWriteInt(path, val); 
 }
 

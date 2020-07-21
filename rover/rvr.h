@@ -21,9 +21,20 @@ extern const char* const ROOT_COMPONENT_DIR;
 /** @brief Format string for snprintf to build path. */
 extern const char* const PATH_FMT;
 
-/** @brief Structure to hold either int/uint value or string value to write. */
-struct rvrvalue;
+/** @brief Enumerates allowed types (integer, string) for rvrvalue. */
+enum rvrValueType {
+    INTEGER,
+    STRING
+};
 
+/** @brief Structure to hold either int/uint value or string value to write. */
+struct rvrvalue {
+    enum rvrValueType type;
+    union {
+        int num;
+        const char* const str;
+    };
+};
 
 /** End global constants. */
 
@@ -34,7 +45,7 @@ struct rvrvalue;
  * @param val String value to be written.
  * @return Return the number of elements written or -1 if error.
  */
-extern int rvrWrite(const char* path, const char* fmt, struct rvrvalue* val);
+extern int rvrWrite(const char* const path, const char* fmt, struct rvrvalue* val);
 
 /**
  * @brief Write a string into file specified by path.
@@ -42,7 +53,7 @@ extern int rvrWrite(const char* path, const char* fmt, struct rvrvalue* val);
  * @param val String value to be written.
  * @return Return the number of elements written or -1 if error.
  */
-extern int rvrWriteStr(const char* path, char* val);
+extern int rvrWriteStr(const char* const path, const char* const val);
 
 /**
  * @brief Write an integer as string into file specified by path.
@@ -50,7 +61,7 @@ extern int rvrWriteStr(const char* path, char* val);
  * @param val Integer value to be written.
  * @return Return the number of elements written or -1 if error.
  */
-extern int rvrWriteInt(const char* path, int val);
+extern int rvrWriteInt(const char* const path, int val);
 
 /**
  * @brief Write an unsigned integer as string into file specified by path.
@@ -58,7 +69,7 @@ extern int rvrWriteInt(const char* path, int val);
  * @param val Unsigned integer value to be written.
  * @return Return the number of elements written or -1 if error.
  */
-extern int rvrWriteUInt(const char* path, size_t val);
+extern int rvrWriteUInt(const char* const path, size_t val);
 
 
 #endif

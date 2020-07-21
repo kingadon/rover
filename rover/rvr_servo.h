@@ -77,7 +77,7 @@ int servoAttrPath(char* path, enum ServoComponent servo, enum ServoAttr attr);
  * @param val String value to set attribute with.
  * @return Return the number of characters written to string param, -1 if error.
  */
-int servoSetStrAttr(enum ServoComponent servo, enum ServoAttr attr, const char* val);
+int servoSetStrAttr(enum ServoComponent servo, enum ServoAttr attr, const char* const val);
 
 /**
  * @brief Sets positive integer type attribute on the servo component.

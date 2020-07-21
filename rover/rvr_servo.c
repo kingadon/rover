@@ -51,7 +51,7 @@ const char* const servo_stop_actions[] = {
 
 const char* const ROOT_COMPONENT_DIR1 = "sys/class";
 
-int servoSetStrAttr(enum ServoComponent servo, enum ServoAttr attr, const char* val) {
+int servoSetStrAttr(enum ServoComponent servo, enum ServoAttr attr, const char* const val) {
     char path[MAX_PATH_BYTES];
     int numChars = snprintf(path, MAX_PATH_BYTES, PATH_FMT,
                             ROOT_COMPONENT_DIR1, 

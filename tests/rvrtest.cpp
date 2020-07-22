@@ -13,6 +13,8 @@ TEST(RoverTests, TestWrite) {
         .type = INTEGER,
         .num = val
     };
+
+    char* rvr_speed_path = getTestPath(testpath::SPEED);
     rvrWrite(rvr_speed_path, "%d", &rvrval);
 
     FILE* fptr = fopen(rvr_speed_path, "r");
@@ -21,14 +23,14 @@ TEST(RoverTests, TestWrite) {
     fclose(fptr);
     EXPECT_EQ(num, val);
 
-    
+    char* cpath = getTestPath(testpath::COMMAND);
     struct rvrvalue rvrstr = {
         .type = STRING,
         .str = "run-forever" 
     };
-    rvrWrite(rvr_command_path, "%s", &rvrstr);
+    rvrWrite(cpath, "%s", &rvrstr);
 
-    FILE* fptr_com = fopen(rvr_command_path, "r");
+    FILE* fptr_com = fopen(cpath, "r");
     char str[64];
     fscanf(fptr_com, "%63s", str);
     fclose(fptr_com);
@@ -37,8 +39,9 @@ TEST(RoverTests, TestWrite) {
 
 TEST(RoverTests, TestWriteStr) {
     char strval[] = "run-timed";
-    rvrWriteStr(rvr_command_path, strval);
-    FILE* fptr = fopen(rvr_command_path, "r");
+    char* cpath = getTestPath(testpath::COMMAND);
+    rvrWriteStr(cpath, strval);
+    FILE* fptr = fopen(cpath, "r");
     char str[64];
     fscanf(fptr, "%63s", str);
     fclose(fptr);
@@ -47,8 +50,9 @@ TEST(RoverTests, TestWriteStr) {
 
 TEST(RoverTests, TestWriteInt) {
     int val = -100;
-    rvrWriteInt(rvr_duty_path, val);
-    FILE* fptr = fopen(rvr_duty_path, "r");
+    char* dpath = getTestPath(testpath::DUTY);
+    rvrWriteInt(dpath, val);
+    FILE* fptr = fopen(dpath, "r");
     int readval;
     fscanf(fptr, "%d", &readval);
     fclose(fptr);
@@ -57,8 +61,9 @@ TEST(RoverTests, TestWriteInt) {
 
 TEST(RoverTests, TestWriteUInt) {
     size_t val = 1560;
-    rvrWriteUInt(rvr_speed_path, val);
-    FILE* fptr = fopen(rvr_speed_path, "r");
+    char* spath = getTestPath(testpath::SPEED);
+    rvrWriteUInt(spath, val);
+    FILE* fptr = fopen(spath, "r");
     size_t readval;
     fscanf(fptr, "%zu", &readval);
     fclose(fptr);

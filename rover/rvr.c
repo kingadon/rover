@@ -13,6 +13,7 @@ int rvrWrite(const char* const path, const char* fmt, struct rvrvalue* val) {
     FILE* fptr = fopen(path, "w");
     if (!fptr) {
         perror("rvr_write:fopen");
+        printf("error for path: %s\n", path);
         return -1;
     }
 

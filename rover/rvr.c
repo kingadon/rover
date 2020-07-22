@@ -2,8 +2,8 @@
 #include <string.h>
 #include "rvr.h"
 
-#define MAX_BYTES 32
-#define MAX_PATH_BYTES 64
+const size_t MAX_BYTES = 64;
+const size_t MAX_PATH_BYTES = 128;
 const char* const ROOT_COMPONENT_DIR = "sys/class";
 const char* const PATH_FMT = "/%s/%s/%s";
 const char* const NUMBER_FORMAT = "%d\n";

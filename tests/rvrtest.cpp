@@ -7,6 +7,40 @@ extern "C" {
     #include "../rover/rvr.h"
 }
 
+char* getTestPath(enum ServoAttr attr) {
+    switch (attr) {
+        case ServoAttr::SPEED_SP:
+            return (char*) "tests/sys/class/tacho-motor/motor0/speed_sp"; 
+            break;
+        case ServoAttr::DUTY_CYCLE_SP:
+            return (char*) "tests/sys/class/tacho-motor/motor0/duty_cycle_sp"; 
+            break;
+        default:
+            return (char*) "tests/sys/class/tacho-motor/motor0/command"; 
+    }
+}
+
+void readTestStr(char* path, char* str) {
+    FILE* fptr = fopen(path, "r");
+    if (!fptr) {
+        perror("readTestStr:fopen:");
+    } else {
+        fscanf(fptr, "%s", str);
+    }
+    fclose(fptr);
+}
+
+void readTestNum(char* path, int* num) {
+    FILE* fptr = fopen(path, "r");
+    if (!fptr) {
+        perror("readTestStr:fopen:");
+        printf("path: %s\n", path);
+    } else {
+        fscanf(fptr, "%d", num);
+    }
+    fclose(fptr);
+}
+
 TEST(RoverTests, TestWrite) {
     int val = 5;
     struct rvrvalue rvrval = {
@@ -14,16 +48,13 @@ TEST(RoverTests, TestWrite) {
         .num = val
     };
 
-    char* rvr_speed_path = getTestPath(testpath::SPEED);
-    rvrWrite(rvr_speed_path, "%d", &rvrval);
-
-    FILE* fptr = fopen(rvr_speed_path, "r");
+    char* spath = getTestPath(ServoAttr::SPEED_SP);
+    rvrWrite(spath, "%d", &rvrval);
     int num = -1;
-    fscanf(fptr, "%d", &num);
-    fclose(fptr);
+    readTestNum(spath, &num);
     EXPECT_EQ(num, val);
 
-    char* cpath = getTestPath(testpath::COMMAND);
+    char* cpath = getTestPath(ServoAttr::COMMAND);
     struct rvrvalue rvrstr = {
         .type = STRING,
         .str = "run-forever" 
@@ -39,7 +70,7 @@ TEST(RoverTests, TestWrite) {
 
 TEST(RoverTests, TestWriteStr) {
     char strval[] = "run-timed";
-    char* cpath = getTestPath(testpath::COMMAND);
+    char* cpath = getTestPath(ServoAttr::COMMAND);
     rvrWriteStr(cpath, strval);
     FILE* fptr = fopen(cpath, "r");
     char str[64];
@@ -50,7 +81,7 @@ TEST(RoverTests, TestWriteStr) {
 
 TEST(RoverTests, TestWriteInt) {
     int val = -100;
-    char* dpath = getTestPath(testpath::DUTY);
+    char* dpath = getTestPath(ServoAttr::DUTY_CYCLE_SP);
     rvrWriteInt(dpath, val);
     FILE* fptr = fopen(dpath, "r");
     int readval;
@@ -61,7 +92,7 @@ TEST(RoverTests, TestWriteInt) {
 
 TEST(RoverTests, TestWriteUInt) {
     size_t val = 1560;
-    char* spath = getTestPath(testpath::SPEED);
+    char* spath = getTestPath(ServoAttr::SPEED_SP);
     rvrWriteUInt(spath, val);
     FILE* fptr = fopen(spath, "r");
     size_t readval;

@@ -24,8 +24,9 @@ void readTestStr(char* path, char* str) {
     FILE* fptr = fopen(path, "r");
     if (!fptr) {
         perror("readTestStr:fopen:");
+        printf("error for path: %s\n", path);
     } else {
-        fscanf(fptr, "%s", str);
+        fscanf(fptr, " %[^\n]\n", str);
     }
     fclose(fptr);
 }

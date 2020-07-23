@@ -15,6 +15,9 @@ extern const size_t MAX_BYTES;
 /** @brief Maximum bytes to reserve for paths to components. */
 extern const size_t MAX_PATH_BYTES;
 
+/** @brief The value functions will return if error occured. */
+extern const int ERROR_VAL;
+
 /** @brief Root directory of components. */
 extern const char* const ROOT_COMPONENT_DIR;
 

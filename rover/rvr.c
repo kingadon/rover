@@ -4,8 +4,9 @@
 
 const size_t MAX_BYTES = 64;
 const size_t MAX_PATH_BYTES = 128;
+const int ERROR_VAL = -1;
 const char* const ROOT_COMPONENT_DIR = "sys/class";
-const char* const PATH_FMT = "/%s/%s/%s";
+const char* const PATH_FMT = "%s/%s/%s";
 const char* const NUMBER_FORMAT = "%d\n";
 const char* const STRING_FORMAT = "%s\n";
 
@@ -14,7 +15,7 @@ int rvrWrite(const char* const path, const char* fmt, struct rvrvalue* val) {
     if (!fptr) {
         perror("rvr_write:fopen");
         printf("error for path: %s\n", path);
-        return -1;
+        return ERROR_VAL;
     }
 
     int charsWritten = -1;

@@ -49,47 +49,50 @@ const char* const servo_stop_actions[] = {
     "hold"
 };
 
-const char* const ROOT_COMPONENT_DIR1 = "sys/class";
-
-int servoSetStrAttr(enum ServoComponent servo, enum ServoAttr attr, const char* const val) {
-    char path[MAX_PATH_BYTES];
+int buildServoPath(char* path, enum ServoComponent servo, enum ServoAttr attr) { 
     int numChars = snprintf(path, MAX_PATH_BYTES, PATH_FMT,
-                            ROOT_COMPONENT_DIR1, 
+                            ROOT_COMPONENT_DIR, 
                             servo_component_path[servo],
                             servo_attr_path[attr]);
-    if (numChars < 0) { perror("servoSetStrAttr:snprintf"); return -1; }
+    if (numChars < 0) { 
+        perror("buildServoPath:snprintf"); 
+        printf("error building path\n");
+        path = "";
+    } 
 
-    numChars = rvrWriteStr(path, val);
+    return -1;
+}
+
+int servoSetStrAttr(enum ServoComponent servo, enum ServoAttr attr, const char* const val) {
+    char path[MAX_PATH_BYTES]; 
+    buildServoPath(path, servo, attr);
+
+    int numChars = 0;
+    if (path) {
+        numChars = rvrWriteStr(path, val);
+    }
     return numChars;
 }
 
 int servoSetUIntAttr(enum ServoComponent servo, enum ServoAttr attr, size_t val) {
     char path[MAX_PATH_BYTES];
-    int numChars = snprintf(path, MAX_PATH_BYTES, PATH_FMT,
-                            ROOT_COMPONENT_DIR1,
-                            servo_component_path[servo],
-                            servo_attr_path[attr]);
-    if (numChars < 0) {
-        perror("servoSetStrAttr:snprintf");
-        return -1;
-    }
+    buildServoPath(path, servo, attr);
 
-    numChars = rvrWriteUInt(path, val);
+    int numChars = 0;
+    if (path) {
+        numChars = rvrWriteUInt(path, val);
+    }
     return numChars;
 }
 
 int servoSetIntAttr(enum ServoComponent servo, enum ServoAttr attr, int val) {
     char path[MAX_PATH_BYTES];
-    int numChars = snprintf(path, MAX_PATH_BYTES, PATH_FMT,
-                            ROOT_COMPONENT_DIR1,
-                            servo_component_path[servo],
-                            servo_attr_path[attr]);
-    if (numChars < 0) {
-        perror("servoSetStrAttr:snprintf");
-        return -1;
-    }
+    buildServoPath(path, servo, attr);
 
-    numChars = rvrWriteInt(path, val);
+    int numChars = 0;
+    if (path) {
+        numChars = rvrWriteInt(path, val);
+    }
     return numChars;
 }
 
@@ -102,7 +105,7 @@ int servoSetSpeed(enum ServoComponent servo, size_t val) {
         return servoSetUIntAttr(servo, SPEED_SP, val);
     } else {
         perror("servoSetSpeed: speed must be between 0 and 1560\n");
-        return -1;
+        return ERROR_VAL;
     }
 }
 
@@ -111,7 +114,7 @@ int servoSetDutyCycle(enum ServoComponent servo, int val) {
         return servoSetIntAttr(servo, DUTY_CYCLE_SP, val);
     } else {
         perror("servoSetDutyCycle: cycle must be between -100 and 100\n");
-        return -1;
+        return ERROR_VAL;
     }
 }
 

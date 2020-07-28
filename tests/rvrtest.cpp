@@ -10,25 +10,25 @@ extern "C" {
 char* getTestPath(enum ServoAttr attr) {
     switch (attr) {
         case ServoAttr::SPEED_SP:
-            return (char*) "tests/sys/class/tacho-motor/motor0/speed_sp"; 
+            return (char*) "sys/class/tacho-motor/motor0/speed_sp"; 
             break;
         case ServoAttr::DUTY_CYCLE_SP:
-            return (char*) "tests/sys/class/tacho-motor/motor0/duty_cycle_sp"; 
+            return (char*) "sys/class/tacho-motor/motor0/duty_cycle_sp"; 
             break;
         case ServoAttr::COMMAND:
-            return (char*) "tests/sys/class/tacho-motor/motor0/command"; 
+            return (char*) "sys/class/tacho-motor/motor0/command"; 
         case ServoAttr::POSITION_SP:
-            return (char*) "tests/sys/class/tacho-motor/motor0/position_sp"; 
+            return (char*) "sys/class/tacho-motor/motor0/position_sp"; 
         case ServoAttr::POLARITY:
-            return (char*) "tests/sys/class/tacho-motor/motor0/polarity"; 
+            return (char*) "sys/class/tacho-motor/motor0/polarity"; 
         case ServoAttr::RAMP_DOWN_SP:
-            return (char*) "tests/sys/class/tacho-motor/motor0/ramp_down_sp"; 
+            return (char*) "sys/class/tacho-motor/motor0/ramp_down_sp"; 
         case ServoAttr::RAMP_UP_SP:
-            return (char*) "tests/sys/class/tacho-motor/motor0/ramp_up_sp"; 
+            return (char*) "sys/class/tacho-motor/motor0/ramp_up_sp"; 
         case ServoAttr::STOP_ACTION:
-            return (char*) "tests/sys/class/tacho-motor/motor0/stop_action"; 
+            return (char*) "sys/class/tacho-motor/motor0/stop_action"; 
         case ServoAttr::TIME_SP:
-            return (char*) "tests/sys/class/tacho-motor/motor0/time_sp"; 
+            return (char*) "sys/class/tacho-motor/motor0/time_sp"; 
     }
     return (char*) ".";
 }

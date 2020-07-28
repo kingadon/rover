@@ -5,6 +5,8 @@
  * @brief File contains functions and values related to servo components.
  */
 
+#ifndef RVRSERVO_H
+#define RVRSERVO_H
 /** Put global constants here. */
 /** @brief Servo components. Use these to access paths. */
 enum ServoComponent {
@@ -57,9 +59,10 @@ enum ServoStopAction {
  * @brief Builds path to specified servo component using root dir and servo dir paths.
  * @param path Pointer to string variable to hold built path.
  * @param servo The subject servo component.
+ * @param attr The subject attribute.
  * @return Return the number of characters written to string param, -1 if error.
  */
-int servoPath(char* path, enum ServoComponent servo);
+int buildServoPath(char* path, enum ServoComponent servo, enum ServoAttr attr);
 
 /**
  * @brief Builds path to specified servo component attr.
@@ -168,3 +171,4 @@ int servoSetStopAction(enum ServoComponent servo, enum ServoStopAction action);
  * @return Return the number of characters written to string param, -1 if error.
  */
 int servoSetTime(enum ServoComponent servo, size_t val);
+#endif

@@ -191,7 +191,7 @@ TEST(RoverTests, TestRunToRelativePosition) {
     EXPECT_STREQ(readstr, command);
 }
 
-TEST(RoverTests, TestForSeconds) {
+TEST(RoverTests, TestRunForSeconds) {
     size_t val = 111;
     servoRunFor(val, ServoComponent::MOTOR0);
     int readInt;

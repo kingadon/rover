@@ -158,3 +158,51 @@ TEST(RoverTests, TestSetTime) {
     readTestNum(path, &readInt);
     EXPECT_EQ((size_t)readInt, val);
 }
+
+TEST(RoverTests, TestRunToPosition) {
+    size_t position = 888;
+    servoRunTo(position, ServoComponent::MOTOR0);
+
+    int readInt;
+    char* path = getTestPath(ServoAttr::POSITION_SP);
+    readTestNum(path, &readInt);
+    EXPECT_EQ((size_t)readInt, position);
+
+    char command[] = "run-to-abs-pos";
+    path = getTestPath(ServoAttr::COMMAND);
+    char readstr[MAX_PATH_BYTES];
+    readTestStr(path, readstr);
+    EXPECT_STREQ(readstr, command);
+}
+
+TEST(RoverTests, TestRunToRelativePosition) {
+    size_t position = 999;
+    servoRunToRelative(position, ServoComponent::MOTOR0);
+
+    int readInt;
+    char* path = getTestPath(ServoAttr::POSITION_SP);
+    readTestNum(path, &readInt);
+    EXPECT_EQ((size_t)readInt, position);
+
+    char command[] = "run-to-rel-pos";
+    path = getTestPath(ServoAttr::COMMAND);
+    char readstr[MAX_PATH_BYTES];
+    readTestStr(path, readstr);
+    EXPECT_STREQ(readstr, command);
+}
+
+TEST(RoverTests, TestForSeconds) {
+    size_t val = 111;
+    servoRunFor(val, ServoComponent::MOTOR0);
+    int readInt;
+    char* path = getTestPath(ServoAttr::TIME_SP);
+    readTestNum(path, &readInt);
+    EXPECT_EQ((size_t)readInt, val);
+
+    char command[] = "run-timed";
+    path = getTestPath(ServoAttr::COMMAND);
+    char readstr[MAX_PATH_BYTES];
+    readTestStr(path, readstr);
+    EXPECT_STREQ(readstr, command);
+
+}

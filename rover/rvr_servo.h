@@ -171,4 +171,53 @@ int servoSetStopAction(enum ServoComponent servo, enum ServoStopAction action);
  * @return Return the number of characters written to string param, -1 if error.
  */
 int servoSetTime(enum ServoComponent servo, size_t val);
+
+/**
+ * @brief Turns the motor on until a Absolute position is reach.
+ * @param position Absolute position.
+ * @param servo The subject servo component.
+ * @return Return the number of characters written to string param, -1 if error.
+ */
+int servoRunTo(int position, enum ServoComponent servo);
+
+/**
+ * @brief Turns the motor on until a Relative position is reach.
+ * @param position Relative position.
+ * @param servo The subject servo component.
+ * @return Return the number of characters written to string param, -1 if error.
+ */
+int servoRunToRelative(int position, enum ServoComponent servo);
+
+/**
+ * @brief Turns motor on for specified seconds.
+ * @param seconds Time in seconds.
+ * @param servo The subject servo component.
+ * @return Return the number of characters written to string param, -1 if error.
+ */
+int servoRunFor(size_t seconds, enum ServoComponent servo);
+
+// use with run-direct command so that changes take immediately
+/**
+ * @brief Sets braking behavior attribute for the servo component. 
+ * @param servo The subject servo component.
+ * @param action String value (either coast, brake, or hold) to set attribute with.
+ * @return Return the number of characters written to string param, -1 if error.
+ */
+int servoRunReverse(enum ServoComponent servo);
+
+/**
+ * @brief Sets braking behavior attribute for the servo component. 
+ * @param servo The subject servo component.
+ * @param action String value (either coast, brake, or hold) to set attribute with.
+ * @return Return the number of characters written to string param, -1 if error.
+ */
+int servoRunAt(size_t speed, enum ServoComponent servo);
+
+/**
+ * @brief Sets braking behavior attribute for the servo component. 
+ * @param servo The subject servo component.
+ * @param action String value (either coast, brake, or hold) to set attribute with.
+ * @return Return the number of characters written to string param, -1 if error.
+ */
+int servoChangeSpeed(size_t speed, enum ServoComponent servo);
 #endif

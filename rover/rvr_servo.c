@@ -141,3 +141,27 @@ int servoSetStopAction(enum ServoComponent servo, enum ServoStopAction action) {
 int servoSetTime(enum ServoComponent servo, size_t val) {
     return servoSetUIntAttr(servo, TIME_SP, val);
 }
+
+int servoRunTo(int position, enum ServoComponent servo) {
+    int code = servoSetPosition(servo, position);
+    if (code == -1) {
+        return code;
+    }
+    return servoSetCommand(servo, RUN_TO_ABS_POS);
+}
+
+int servoRunToRelative(int position, enum ServoComponent servo) {
+    int code = servoSetPosition(servo, position);
+    if (code == -1) {
+        return code;
+    }
+    return servoSetCommand(servo, RUN_TO_REL_POS);
+}
+
+int servoRunFor(size_t seconds, enum ServoComponent servo) {
+    int code = servoSetTime(servo, seconds);
+    if (code == -1) {
+        return code;
+    }
+    return servoSetCommand(servo, RUN_TIMED);
+}

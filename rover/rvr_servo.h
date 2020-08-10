@@ -198,26 +198,17 @@ int servoRunFor(size_t seconds, enum ServoComponent servo);
 
 // use with run-direct command so that changes take immediately
 /**
- * @brief Sets braking behavior attribute for the servo component. 
+ * @brief Reverse run-direct polarity.
  * @param servo The subject servo component.
- * @param action String value (either coast, brake, or hold) to set attribute with.
  * @return Return the number of characters written to string param, -1 if error.
  */
 int servoRunReverse(enum ServoComponent servo);
 
 /**
- * @brief Sets braking behavior attribute for the servo component. 
+ * @brief Sets run-direct speed.
+ * @param speed How fast to turn motor.
  * @param servo The subject servo component.
- * @param action String value (either coast, brake, or hold) to set attribute with.
  * @return Return the number of characters written to string param, -1 if error.
  */
 int servoRunAt(size_t speed, enum ServoComponent servo);
-
-/**
- * @brief Sets braking behavior attribute for the servo component. 
- * @param servo The subject servo component.
- * @param action String value (either coast, brake, or hold) to set attribute with.
- * @return Return the number of characters written to string param, -1 if error.
- */
-int servoChangeSpeed(size_t speed, enum ServoComponent servo);
 #endif

@@ -12,11 +12,13 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 set(SOURCES
     rvrtest.cpp
+    servotest.cpp
 )
 
 add_executable(RoverTests ${SOURCES})
 
 link_directories(${EV3}/Rover)
 target_link_libraries(RoverTests PUBLIC
+                      gtest
                       gtest_main
                       Rover)

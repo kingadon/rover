@@ -135,10 +135,10 @@ int servoSetPolarity(enum ServoComponent servo, enum ServoPolarity polarity);
 /**
  * @brief Sets position (target for run-to-abs-pos and run-to-rel-pos) attribute for the servo component. 
  * @param servo The subject servo component.
- * @param val Positive integer to set attribute with.
+ * @param pos Position to set attribute with.
  * @return Return the number of characters written to string param, -1 if error.
  */
-int servoSetPosition(enum ServoComponent servo, size_t val);
+int servoSetPosition(enum ServoComponent servo, int pos);
 
 /**
  * @brief Sets ramp down (the time in milliseconds motor from 100% to 0%) attribute for the servo component. 
@@ -205,10 +205,25 @@ int servoRunFor(size_t seconds, enum ServoComponent servo);
 int servoRunReverse(enum ServoComponent servo);
 
 /**
+ * @brief Normal run-direct polarity.
+ * @param servo The subject servo component.
+ * @return Return the number of characters written to string param, -1 if error.
+ */
+int servoRunNormal(enum ServoComponent servo);
+
+/**
  * @brief Sets run-direct speed.
  * @param speed How fast to turn motor.
  * @param servo The subject servo component.
  * @return Return the number of characters written to string param, -1 if error.
  */
 int servoRunAt(size_t speed, enum ServoComponent servo);
+
+/**
+ * @brief Runs one cycle between positive position and its negative.
+ * @param servo The subject servo component.
+ * @param pos Start position.
+ * @return Return the number of characters written to string param, -1 if error.
+ */
+int servoRunCycle(enum ServoComponent servo, int pos, enum ServoCommand com);
 #endif

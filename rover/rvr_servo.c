@@ -122,8 +122,8 @@ int servoSetPolarity(enum ServoComponent servo, enum ServoPolarity polarity) {
     return servoSetStrAttr(servo, POLARITY, servo_polarities[polarity]);
 }
 
-int servoSetPosition(enum ServoComponent servo, size_t val) {
-    return servoSetUIntAttr(servo, POSITION_SP, val);
+int servoSetPosition(enum ServoComponent servo, int pos) {
+    return servoSetUIntAttr(servo, POSITION_SP, pos);
 }
 
 int servoSetRampDown(enum ServoComponent servo, size_t val) {
@@ -164,4 +164,38 @@ int servoRunFor(size_t seconds, enum ServoComponent servo) {
         return code;
     }
     return servoSetCommand(servo, RUN_TIMED);
+}
+
+int servoRunReverse(enum ServoComponent servo) {
+    int code = servoSetCommand(servo, RUN_DIRECT);
+    if (code == -1) {
+        return code;
+    }
+    return servoSetPolarity(servo, INVERSED);
+}
+
+int servoRunNormal(enum ServoComponent servo) {
+    int code = servoSetCommand(servo, RUN_DIRECT);
+    if (code == -1) {
+        return code;
+    }
+    return servoSetPolarity(servo, NORMAL);
+}
+
+int servoRunAt(size_t speed, enum ServoComponent servo) {
+    int code = servoSetCommand(servo, RUN_DIRECT);
+    if (code == -1) {
+        return code;
+    }
+    return servoSetSpeed(servo, speed);
+}
+
+int servoRunCycle(enum ServoComponent servo, int pos, enum ServoCommand com) {
+    int code = servoSetPosition(servo, pos);
+    if (code = -1) {
+        return code;
+    }
+    servoSetCommand(servo, com);
+    servoSetPosition(servo, -pos);
+    return servoSetCommand(servo, com);
 }

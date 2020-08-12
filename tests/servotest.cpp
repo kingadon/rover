@@ -100,15 +100,15 @@ TEST(RoverTests, TestSetPolarity) {
 }
 
 TEST(RoverTests, TestSetPosition) {
-    size_t val = 100;
-    int len = 4;
+    int val = -121;
+    int len = 5;
     int numChars = servoSetPosition(ServoComponent::MOTOR0, val);
     EXPECT_EQ(numChars, len);
 
     int readInt;
     char* path = getTestPath(ServoAttr::POSITION_SP);
     readTestNum(path, &readInt);
-    EXPECT_EQ((size_t)readInt, val);
+    EXPECT_EQ(readInt, val);
 }
 
 TEST(RoverTests, TestSetRampDown) {
@@ -206,3 +206,50 @@ TEST(RoverTests, TestRunForSeconds) {
     EXPECT_STREQ(readstr, command);
 
 }
+
+TEST(RoverTests, TestRunReverse) {
+    char val[] = "inversed";
+    servoRunReverse(ServoComponent::MOTOR0);
+
+    char readstr[MAX_PATH_BYTES];
+    char* path = getTestPath(ServoAttr::POLARITY);
+    readTestStr(path, readstr);
+    EXPECT_STREQ(readstr, val);
+}
+
+TEST(RoverTests, TestRunNormal) {
+    char val[] = "normal";
+    servoRunNormal(ServoComponent::MOTOR0);
+
+    char readstr[MAX_PATH_BYTES];
+    char* path = getTestPath(ServoAttr::POLARITY);
+    readTestStr(path, readstr);
+    EXPECT_STREQ(readstr, val);
+}
+
+TEST(RoverTests, TestRunAt) {
+    size_t val = 555;
+    int readInt;
+    servoRunAt(val, ServoComponent::MOTOR0);
+    char* path = getTestPath(ServoAttr::SPEED_SP);
+    readTestNum(path, &readInt);
+    EXPECT_EQ((size_t)readInt, val);
+}
+
+TEST(RoverTests, TestRunCycle) {
+    int val = 191;
+    servoRunCycle(ServoComponent::MOTOR0, val, ServoCommand::RUN_TO_ABS_POS);
+
+    int readInt;
+    char* path = getTestPath(ServoAttr::POSITION_SP);
+    readTestNum(path, &readInt);
+    EXPECT_EQ(readInt, -val);
+
+    char command[] = "run-to-abs-pos";
+    path = getTestPath(ServoAttr::COMMAND);
+    char readstr[MAX_PATH_BYTES];
+    readTestStr(path, readstr);
+    EXPECT_STREQ(readstr, command);
+
+}
+

@@ -192,7 +192,7 @@ int servoRunAt(size_t speed, enum ServoComponent servo) {
 
 int servoRunCycle(enum ServoComponent servo, int pos, enum ServoCommand com) {
     int code = servoSetPosition(servo, pos);
-    if (code = -1) {
+    if (code == -1) {
         return code;
     }
     servoSetCommand(servo, com);
